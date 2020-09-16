@@ -1,18 +1,29 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <form @submit.prevent="handleQuery">
+      <input type="text" v-model.trim="query" required />
+    </form>
+    <gimage />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      query: ''
+    }
+  },
+  methods: {
+    handleQuery() {
+      if (!this.query) { return }
+      this.$store.dispatch('getRandomGif', this.query)
+    }
   }
+
+
 }
 </script>
 
